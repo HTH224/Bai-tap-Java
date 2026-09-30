@@ -1,0 +1,102 @@
+public class Main {
+
+    public static void main(String[] args) {
+
+        // Bài 1: 
+
+        Student sv1 = new Student("Lan", 8, 7.5, 9);
+        Student sv2 = new Student("Minh", 9, 6, 6.5);
+        Student sv3 = new Student("Hùng", 7, 5, 5);
+
+        System.out.println(sv1.getMssv() + " | " 
+                + sv1.getName() + " | ĐTB = " 
+                + sv1.diemTrungBinh());
+
+        System.out.println(sv2.getMssv() + " | " 
+                + sv2.getName() + " | ĐTB = " 
+                + sv2.diemTrungBinh());
+
+        System.out.println(sv3.getMssv() + " | " 
+                + sv3.getName() + " | ĐTB = " 
+                + sv3.diemTrungBinh());
+
+        try {
+            sv1.setDiemGK(-1);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Bị chặn: " + e.getMessage());
+        }
+
+        try {
+            sv1.setDiemGK(11);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Bị chặn: " + e.getMessage());
+        }
+
+        System.out.println("Điểm GK của Lan vẫn là: " 
+                + sv1.getDiemGK());
+
+        double diemTrungBinhLanTruoc = sv1.diemTrungBinh();
+
+        sv3.setDiemCK(6);
+
+        double diemTrungBinhLanSau = sv1.diemTrungBinh();
+
+        System.out.println("ĐTB Lan trước = " 
+                + diemTrungBinhLanTruoc);
+
+        System.out.println("ĐTB Lan sau khi đổi điểm Hùng = " 
+                + diemTrungBinhLanSau);
+
+
+        // Bài 2: 
+
+        sv1.capNhatEmail("lan@ptit.edu.vn");
+        sv1.capNhatSdt("0912345678");
+
+        System.out.println(sv1.getMssv() + " | "
+                + sv1.getEmail() + " | "
+                + sv1.getSdt());
+
+        System.out.println("MSSV của Lan: " + sv1.getMssv());
+        System.out.println("MSSV của Minh: " + sv2.getMssv());
+        System.out.println("MSSV của Hùng: " + sv3.getMssv());
+
+        System.out.println("Tổng số sinh viên đã tạo: "
+                + Student.getTotalStudents());
+
+
+        try {
+            Student svSai = new Student("Sai", 11, 5, 5);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Không tạo được: " 
+                    + e.getMessage());
+        }
+
+        System.out.println("Sau lần tạo lỗi, tổng số sinh viên vẫn là: "
+                + Student.getTotalStudents());
+
+
+        // Bài 3: 
+
+        Classroom lop = new Classroom("D21CQCN01-B");
+
+        lop.addStudent(sv1);
+        lop.addStudent(sv2);
+        lop.addStudent(sv3);
+
+        Student sv4 = new Student("Nam", 5, 4, 3);
+
+        lop.addStudent(sv4);
+
+        try {
+            lop.addStudent(sv1);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Không thêm được: " 
+                    + e.getMessage());
+        }
+
+        System.out.println("Chương trình vẫn chạy tiếp");
+
+        lop.inBangDiem();
+    }
+}
